@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Validation for Home page if there is no token, it will directly to register page -->
+    <script>
+    (function(){
+      if(localStorage.getItem('token') == null)
+      {
+        window.location.href = "/index.html"
+      }
+    }())
+    </script>
+
+    <!-- GAP -->
+  </head>
+  <body>
+
+    <div id="app">
+
+      <center>
+        <h1>WELCOME</h1>
+        <h4>Input task</h4>
+        <input type="text" name="" value="" v-model='formTask'>
+        <button type="button" name="button" v-on:click='addtask(formTask)' @keyup.enter='addtask(formTask)'>create task</button>
+        <button class="logout" type="button" name="button">Logout</button>
+
+        <!-- GAP -->
+        <!-- SHOW TASK -->
+        <!-- GAP -->
+
+        <div class="w3-container">
+    <h2></h2>
+    <p>TASK LIST</p>
+
+    <table class="w3-table-all w3-card-4">
+      <tr>
+        <!-- <th>No</th> -->
+        <th>Task</th>
+        <th>Status</th>
+        <th>Option</th>
+      </tr>
+      <tr v-for='(task,index) in taskes'>
+        <td>{{task.taskName}}</td>
+        <td><input type="checkbox" name="" value="" v-model='task' v-on:click='ubahStatus(task._id, index)'>  {{task.status}}</td>
+        <td><button type="button" name="button" v-on:click='deleteTask(task._id,index)'>Delete Task</button></td>
+      </tr>
+    </table>
+  </div>
+
+      </center>
+
+    </div>
+  <script src="./controller/app.js"></script>
+  </body>
+  <script>
+    $('.logout').click(function(){
+      localStorage.removeItem('token')
+      window.location.href ="/login.html"
+    })
+  </script>
+</html>
