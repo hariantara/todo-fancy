@@ -28,15 +28,26 @@ var app = new Vue({
           console.log(response);
         })
     },
-    ubahStatus(data){
+    ubahStatus(data,index){
       console.log("ubahStatus",data);
+
+      var status = ''
+      if(this.taskes[index].status == "Done"){
+        status = 'Pending'
+      }
+      else {
+        status = 'Done'
+      }
+
       var self = this
-      axios.put(`http://localhost:3000/tasks/update/${data}`,{
-        status: 'Done'
+      axios.put(`http://localhost:3000/tasks/update/${data._id}`,{
+        taskName: data.taskName,
+        status: status
       })
       .then((response)=>{
         console.log("respon UBAHSTATUS ",response);
-        self.toggle.push(response.data)
+
+        self.taskes[index].status = status
       })
     },
     deleteTask(data,index){

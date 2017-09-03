@@ -49,7 +49,7 @@
       </tr>
       <tr v-for='(task,index) in taskes'>
         <td>{{task.taskName}}</td>
-        <td><input type="checkbox" name="" value="" v-model='task' v-on:click='ubahStatus(task._id, index)'>  {{task.status}}</td>
+        <td><input type="checkbox" name="" value="" v-on:click='ubahStatus(task,index)'>  {{task.status}}</td>
         <td><button type="button" name="button" v-on:click='deleteTask(task._id,index)'>Delete Task</button></td>
       </tr>
     </table>
