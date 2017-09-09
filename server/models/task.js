@@ -6,6 +6,10 @@ var Schema = mongoose.Schema;
 var TaskSchema = new Schema({
   taskName: String,
   status: String,
+  user_id: {
+    type:Schema.Types.ObjectId,
+    ref:'Users'
+  },
   createdAt: Date,
   updatedAt: Date
 })

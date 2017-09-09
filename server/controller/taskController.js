@@ -9,7 +9,7 @@ var createTask = function(req, res){
   task.status = req.body.status
   task.createdAt = new Date()
   task.updatedAt = new Date()
-
+  task.user_id = req.headers.authentic
   task.save(function(err){
     if(!err)
     {
@@ -39,7 +39,12 @@ var updateTask = function(req, res){
 }
 
 var readTask = function(req, res){
-  modelTask.find()
+  modelTask.find({
+    user_id: req.headers.authentic._id
+  })
+  .populate({
+    path: 'Users', select: 'username'
+  })
   .then(data=>{
     res.send(data)
   })
